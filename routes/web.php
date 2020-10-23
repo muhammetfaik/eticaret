@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PagesController;
 
 
 /*
@@ -15,7 +14,6 @@ use App\Http\Controllers\PagesController;
 |
 */
 
-Route::get('/',[PagesController::class, 'index']);
 
 Route::post('/hello', function () {
     //return view('welcome');
@@ -37,3 +35,6 @@ Route::get('/urun/{urunadi}/{id?}',function($urunadi,$id){
 Route::get('/kampanya',function(){
     return redirect()->route('urun_detay',['urunadi'=>'elma','id' => 5]);
 });
+
+Route::get('/','AnasayfaController@index')->name('anasayfa');
+
