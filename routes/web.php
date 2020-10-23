@@ -26,3 +26,14 @@ Route::get('/users/{id}',function($id){
     return 'This is a user ' . $id;
 }
 );
+Route::get('/api/v1/merhaba',function(){
+    return ['mesaj' => 'Merhaba'];
+});
+
+Route::get('/urun/{urunadi}/{id?}',function($urunadi,$id){
+    return "Ürün adi: $id $urunadi" ;
+})->name('urun_detay');
+
+Route::get('/kampanya',function(){
+    return redirect()->route('urun_detay',['urunadi'=>'elma','id' => 5]);
+});
