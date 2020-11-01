@@ -3,7 +3,7 @@
 
 <head>    
     <title>@yield('title',config('app.name'))</title>
-    @include('layout.partials.head')
+    @include('layouts.partials.head')
     @yield('head')
 </head>
 
@@ -13,7 +13,7 @@
 @include('layouts.partials.footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-@yield('footer')
+@yield('footer')    
 </body>
 
 </html>

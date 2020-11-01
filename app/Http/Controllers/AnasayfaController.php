@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UrunDetay;
 use Illuminate\Http\Request;
+use App\Models\Kategori;
 
 class AnasayfaController extends Controller
 {
     public function index()
     {
-          $isim = "Cem";
-          $soyisim = "Gündüzoğlu";
-          $isimler = ['Cem','Esra','Murat','Ebru','Aydın'];
-          $kullanicilar = [ ['id'=> 1,'kullanici_adi' => 'Cem'], 
-          ['id'=> 1,'kullanici_adi' => 'Cem'], 
-          ['id'=> 2,'kullanici_adi' => 'Esra'],   
-          ['id'=> 3,'kullanici_adi' => 'Murat'], 
-          ['id'=> 4,'kullanici_adi' => 'Ebru'], 
-          ['id'=> 5,'kullanici_adi' => 'Aydın'] 
-        ];
-          return view('anasayfa',compact('isim','soyisim','isimler','kullanicilar'));
+        $kategoriler = Kategori::whereRaw('ust_id is null')->take(8)->get();
+
+       $urunler_slider = UrunDetay::with('urun')->where('goster_slider',1)->take(5)->get();
+       $urun_gunun_firsati = Urun::select('urun_detay','urun_detay.urun_id','urun.id')-where('urun_detay.goster_gunun_firsati',1)
+               ->orderBy('guncelleme_tarihi','desc')->first();
+       return view('anasayfa',compact('kategoriler','urunler_slider'));
     }
 }

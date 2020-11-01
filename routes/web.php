@@ -15,30 +15,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('/hello', function () {
-    //return view('welcome');
-    return '<h1>Hello World</h1>';
-});
-
-Route::get('/users/{id}',function($id){
-    return 'This is a user ' . $id;
-}
-);
-Route::get('/api/v1/merhaba',function(){
-    return ['mesaj' => 'Merhaba'];
-});
-
-Route::get('/urun/{urunadi}/{id?}',function($urunadi,$id){
-    return "Ürün adi: $id $urunadi" ;
-})->name('urun_detay');
-
-Route::get('/kampanya',function(){
-    return redirect()->route('urun_detay',['urunadi'=>'elma','id' => 5]);
-});
 
 Route::get('/','AnasayfaController@index')->name('anasayfa');
 
 Route::view('/kategori','kategori');
-Route::view('/urun','urun');
 Route::view('/sepet','sepet');
 
+Route::get('/kategori/{slug_kategoriadi}', 'KategoriController@index')->name('kategori');
+Route::get('/urun/{slug_urunadi}','UrunController@index')->name('urun');
+
+Route::get('/sepet','SepetController@index')->name('sepet');
+
+Route::get('/odeme','OdemeController@index')->name('odeme');
+
+Route::get('/siparisler','SiparisController@index')->name('siparisler');
+
+Route::get('/siparisler/{id}','SiparisController@detay')->name('siparis');
+
+Route::get('/kullanici/oturumac','KullaniciController@giris_form')->name('kullanici.oturumac');
+
+Route::get('/kullanici/kaydol','KullaniciController@kaydol_form')->name('kullanici.kaydol');
+
+
+Route::group(['prefix' => 'kullanici'], function () {
+    Route::get('/oturumac','KullaniciController@giris_form')->name('kullanici.oturumac');
+
+    Route::get('/kaydol','KullaniciController@kaydol_form')->name('kullanici.kaydol');
+
+});
