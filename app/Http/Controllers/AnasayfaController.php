@@ -21,7 +21,7 @@ class AnasayfaController extends Controller
            ->first();
         $urunler_one_cikan = UrunDetay::with('urun')->where('goster_one_cikan',1)->take(4)->get();
         $urunler_cok_satan = UrunDetay::with('urun')->where('goster_cok_satan',1)->take(4)->get();
-        $urunler_indirimli = UrunDetay::with('urun')->where('goster_indirimli',1)->take(4)->get();
+        $urunler_indirimli = UrunDetay::with('urun')->where('goster_indirim',1)->take(4)->get();
 
 
         return view('anasayfa',compact('kategoriler','urunler_slider','urun_gunun_firsati','urunler_one_cikan','urunler_cok_satan','urunler_indirimli'));
